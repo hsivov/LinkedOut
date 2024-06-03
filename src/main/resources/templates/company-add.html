@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LinkedOut</title>
+    <link rel="stylesheet" href="/css/reset-css.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-toggler bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link text-white" href="/companies/add">Add Company</a>
+                <a class="nav-item nav-link text-white" href="/employees/add">Add Employee</a>
+                <a class="nav-item nav-link text-white" href="/companies/all">All Companies</a>
+                <a class="nav-item nav-link text-white" href="/employees/all">All Employees</a>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="row">
+    <div class="col-md-2"></div>
+    <main class="jumbotron text-center rounded col-md-8 align-self-center">
+        <div class="justify-content-center">
+            <h1>Add Company</h1>
+        </div>
+        <form th:action="@{/companies/add}"
+              th:method="POST"
+              th:object="${companyDTO}"
+                class="m-md-auto w-50 text-center">
+            <div class="form-group">
+                <label th:for="name">Name</label>
+                <input th:field="*{name}" type="text" class="form-control text-center" aria-describedby="nameHelp"
+                       th:errorclass="is-invalid"/>
+                <small class="invalid-feedback">Name length must be between 2 and 10</small>
+            </div>
+
+            <div class="form-group">
+                <label th:for="town">Town</label>
+                <input th:field="*{town}" type="text" class="form-control text-center" aria-describedby="town"
+                       th:errorclass="is-invalid"/>
+                <small class="invalid-feedback">Town length must be between 2 and 10</small>
+            </div>
+
+            <div class="form-group">
+                <label th:for="description">Description</label>
+                <input type="text" class="form-control text-center" 
+				th:field="*{description}" aria-describedby="description"
+                th:errorclass="is-invalid"/>
+                <small class="invalid-feedback">Description length must be more than 10</small>
+            </div>
+
+            <div class="form-group">
+                <label th:for="budget">Budget</label>
+                <input type="number" class="form-control text-center"
+				th:field="*{budget}" aria-describedby="budget"
+                th:errorclass="is-invalid"/>
+                <small class="invalid-feedback">Budget must be positive number</small>
+            </div>
+
+            <button type="submit" class="btn btn-secondary">Add Company</button>
+        </form>
+    </main>
+</div>
+
+<footer id="footer">
+    <div class="container-fluid bg-transparent rounded">
+        <div class="text-white p-2 text-center">&copy; Spring Team 2020. All rights reserved.</div>
+    </div>
+</footer>
+</body>
+</html>
