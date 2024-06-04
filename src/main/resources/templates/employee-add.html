@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>LinkedOut</title>
@@ -32,68 +32,62 @@
             <div class="justify-content-center">
                 <h1>Add Employee</h1>
             </div>
-            <form class="m-md-auto w-50 text-center">
+            <form th:action="@{/employees/add}"
+                  th:method="POST"
+                  th:object="${employeeDTO}"
+                  class="m-md-auto w-50 text-center">
 
                 <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="text" class="form-control text-center" id="firstName" aria-describedby="firstName" name="firstName" />
+                    <label th:for="firstName">First Name</label>
+                    <input th:field="*{firstName}" type="text"
+                           class="form-control text-center" aria-describedby="firstName"/>
                     <small>Error message</small>
                 </div>
 
                 <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control text-center" id="lastName" aria-describedby="lastName" name="lastName"/>
+                    <label th:for="lastName">Last Name</label>
+                    <input th:field="*{lastName}" type="text" class="form-control text-center" aria-describedby="lastName"/>
                     <small>Error message</small>
                 </div>
                 <fieldset class="form-group">
                     <legend>Choose Education Level</legend>
-                    <div class="form-check">
+                    <div th:each="level: ${levels}" class="form-check">
                         <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="educationLevel"/>
-                            <span>Master</span>
+                            <input th:field="*{educationLevel}" th:value="${level.name()}" type="radio" class="form-check-input" />
+                            <span th:text="${level}">Level</span>
                         </label>
                     </div>
-                    <div class="form-check disabled">
-                        <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="educationLevel"/>
-                            <span>Bachelor</span>
-                        </label>
-                    </div>
-                    <div class="form-check disabled">
-                        <label class="form-check-label">
-                            <input type="radio" class="form-check-input " name="educationLevel" />
-                            <span>Secondary</span>
-                        </label>
-                    </div>
+
                     <small>Error message</small>
-					</fieldset>
+                </fieldset>
 
                 <div class="form-group">
-                    <label for="company"><h5>All available companies</h5></label>
-                    <select multiple="false" class="form-control text-center" id="company" name="company">
-                        <option> First Company name</option>
-                        <option> Second Company name</option>
-                        <option> Third Company name</option>
+                    <label th:for="company"><h5>All available companies</h5></label>
+                    <select th:field="*{company}" multiple="false" class="form-control text-center">
+                        <option th:each="company: ${companies}"
+                                th:text="${company.name}"
+                                th:value="${company.name}"></option>
+
                     </select>
                     <small>Error message</small>
 				</div>
 
                 <div class="form-group">
-                    <label for="jobTitle">Job Title</label>
-                    <input type="text" class="form-control text-center" id="jobTitle" aria-describedby="jobTitle" name="jobTitle" />
+                    <label th:for="jobTitle">Job Title</label>
+                    <input th:field="*{jobTitle}" type="text" class="form-control text-center" aria-describedby="jobTitle"/>
                     <small>Error message</small>
                 </div>
 
                 <div class="form-group">
-                    <label for="birthDate">Birth Date</label>
-                    <input type="date" class="form-control text-center" id="birthDate" aria-describedby="birthDate" name="birthDate" />
+                    <label th:for="birthDate">Birth Date</label>
+                    <input th:field="*{birthDate}" type="date" class="form-control text-center" aria-describedby="birthDate"/>
                     <small>Error message</small>
                 </div>
 
                 <div class="form-group">
-                    <label for="salary">Salary</label>
-                    <input type="number" min="0" class="form-control text-center" id="salary" 
-					aria-describedby="salary" name="salary"/>
+                    <label th:for="salary">Salary</label>
+                    <input th:field="*{salary}" type="number" min="0" class="form-control text-center"
+					aria-describedby="salary"/>
                     <small>Error message</small>
                 </div>
 

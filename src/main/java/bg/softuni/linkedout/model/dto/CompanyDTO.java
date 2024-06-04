@@ -5,8 +5,10 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public class CompanyDTO {
+    private UUID uuid;
     @Size(min = 2, max = 10)
     private String name;
     @Size(min = 2, max = 10)
@@ -16,6 +18,14 @@ public class CompanyDTO {
     @NotNull
     @Positive
     private BigDecimal budget;
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
 
     public String getName() {
         return name;
